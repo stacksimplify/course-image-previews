@@ -8,31 +8,22 @@
            display:flex; flex-direction:column; align-items:center; height:100vh; justify-content:center; }
     img { max-width:90%; max-height:80vh; border:2px solid #444; border-radius:10px; margin-bottom:15px; background:#000; }
     .controls { display:flex; gap:15px; margin-top:10px; }
-    button { background:#444; border:none; color:#fff; padding:10px 20px; border-radius:8px; cursor:pointer; }
-    button:hover { background:#666; }
-    .top-controls { margin-bottom:15px; }
-    .footer {
-      margin-top:20px;
-      font-size:14px;
-      text-align:center;
+    button, .top-controls a {
+      background:#444; border:none; color:#fff; padding:10px 16px; border-radius:8px;
+      cursor:pointer; font-size:14px; text-decoration:none; display:inline-block;
+    }
+    button:hover, .top-controls a:hover { background:#666; }
+    .top-controls {
+      margin-bottom:15px;
       display:flex;
-      flex-direction:row;   /* ✅ horizontal layout */
+      gap:12px;
       justify-content:center;
-      gap:12px;             /* spacing between buttons */
-      flex-wrap:wrap;       /* wrap on small screens */
+      flex-wrap:wrap;
     }
-    .footer a {
-      text-decoration:none;
-      padding:8px 14px;
-      border-radius:6px;
-      display:inline-block;
-    }
-    .footer a.home { background:#444; color:#fff; }
-    .footer a.home:hover { background:#666; }
-    .footer a.github { background:#2d3748; color:#61dafb; }
-    .footer a.github:hover { background:#3a475c; }
-    .footer a.udemy { background:#a435f0; color:#fff; }
-    .footer a.udemy:hover { background:#922bd9; }
+    .top-controls a.github { background:#2d3748; color:#61dafb; }
+    .top-controls a.github:hover { background:#3a475c; }
+    .top-controls a.udemy { background:#a435f0; color:#fff; }
+    .top-controls a.udemy:hover { background:#922bd9; }
     h2 a { color:#fff; text-decoration:none; }
     h2 a:hover { color:#a435f0; }
     /* Floating CTA */
@@ -51,9 +42,7 @@
       transition: background 0.3s ease;
       z-index: 1000;
     }
-    .cta-udemy:hover {
-      background: #922bd9;
-    }
+    .cta-udemy:hover { background:#922bd9; }
   </style>
 </head>
 <body>
@@ -65,6 +54,8 @@
 
   <div class="top-controls">
     <button onclick="goHome()">🏠 Home</button>
+    <a class="github" href="https://github.com/stacksimplify/aws-devops-realworld" target="_blank">💻 GitHub Repo</a>
+    <a class="udemy" href="https://www.udemy.com/course/aws-devops-realworld-projects/?refcode=stacksimplify" target="_blank">🎓 View on Udemy</a>
   </div>
 
   <img id="gallery" src="" alt="Course Image">
@@ -72,12 +63,6 @@
   <div class="controls">
     <button onclick="prevImage()">⬅ Previous</button>
     <button onclick="nextImage()">Next ➡</button>
-  </div>
-
-  <div class="footer">
-    <a id="homeLink" class="home" href="#">🏠 Back to Home</a>
-    <a class="github" href="https://github.com/stacksimplify/aws-devops-realworld" target="_blank">💻 View GitHub Repo</a>
-    <a class="udemy" href="https://www.udemy.com/course/aws-devops-realworld-projects/?refcode=stacksimplify" target="_blank">🎓 View on Udemy</a>
   </div>
 
   <!-- Floating Enroll Button -->
@@ -98,7 +83,6 @@
       return `${window.location.protocol}//${window.location.host}/`;
     }
     function goHome() { window.location.href = getHomeUrl(); }
-    document.getElementById("homeLink").href = getHomeUrl();
 
     async function fetchImages() {
       const url = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${imagesFolder}`;
