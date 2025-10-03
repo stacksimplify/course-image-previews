@@ -27,7 +27,7 @@
     }
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill,minmax(280px,1fr));
+      grid-template-columns: repeat(auto-fill,minmax(300px,1fr));
       gap: 25px;
       max-width: 1100px;
       margin: 0 auto;
@@ -36,9 +36,11 @@
       background: #1c1f27;
       padding: 20px;
       border-radius: 12px;
-      text-align: center;
       transition: all 0.2s ease;
       border: 1px solid #2a2d3a;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
     .card:hover {
       background: #292d38;
@@ -54,41 +56,104 @@
       color: #bbb;
       min-height: 40px;
     }
-    .card a {
+    .links {
+      margin-top: 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .links a {
       display: inline-block;
-      margin-top: 12px;
-      padding: 10px 16px;
-      background: #444;
-      color: #fff;
-      text-decoration: none;
+      padding: 10px;
+      text-align: center;
       border-radius: 8px;
+      text-decoration: none;
+      font-size: 14px;
       transition: background 0.2s ease;
     }
-    .card a:hover {
+    .links a.gallery {
+      background: #444;
+      color: #fff;
+    }
+    .links a.gallery:hover {
       background: #666;
+    }
+    .links a.github {
+      background: #2d3748;
+      color: #61dafb;
+    }
+    .links a.github:hover {
+      background: #3a475c;
+    }
+    .links a.udemy {
+      background: #a435f0;
+      color: #fff;
+    }
+    .links a.udemy:hover {
+      background: #922bd9;
+    }
+    /* Floating CTA */
+    .cta-udemy {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #a435f0;
+      color: #fff;
+      padding: 14px 22px;
+      border-radius: 50px;
+      font-size: 15px;
+      font-weight: bold;
+      text-decoration: none;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      transition: background 0.3s ease;
+      z-index: 1000;
+    }
+    .cta-udemy:hover {
+      background: #922bd9;
     }
   </style>
 </head>
 <body>
   <header>
     <h1>📚 StackSimplify – Course Image Galleries</h1>
-    <p class="subtitle">Preview all course diagrams before enrolling. Use ←/→ to navigate inside a gallery.</p>
+    <p class="subtitle">Preview diagrams, browse repos, and access courses on Udemy.</p>
   </header>
 
   <div class="grid">
+
+    <!-- AWS DevOps -->
     <div class="card">
-      <h2>AWS DevOps</h2>
-      <p>Complete DevOps real-world project implementation on AWS with EKS, Terraform, Docker, and CI/CD.</p>
-      <a href="courses/aws-devops/">View Gallery →</a>
+      <div>
+        <h2>AWS DevOps</h2>
+        <p>Complete DevOps real-world project implementation on AWS with EKS, Terraform, Docker, and CI/CD.</p>
+      </div>
+      <div class="links">
+        <a class="gallery" href="courses/aws-devops/">📷 View Image Gallery</a>
+        <a class="github" href="https://github.com/stacksimplify/aws-devops-realworld" target="_blank">💻 View GitHub Repo</a>
+        <a class="udemy" href="https://www.udemy.com/course/aws-devops-realworld-projects/?refcode=stacksimplify" target="_blank">🎓 View on Udemy</a>
+      </div>
     </div>
 
+    <!-- AWS AI Practitioner -->
     <div class="card">
-      <h2>AWS AI Practitioner</h2>
-      <p>Get started with Generative AI on AWS. Learn Bedrock, Foundation Models, and practical AI use cases.</p>
-      <a href="courses/aws-ai-practitioner/">View Gallery →</a>
+      <div>
+        <h2>AWS AI Practitioner</h2>
+        <p>Get started with Generative AI on AWS. Learn Bedrock, Foundation Models, and practical AI use cases.</p>
+      </div>
+      <div class="links">
+        <a class="gallery" href="courses/aws-ai-practitioner/">📷 View Image Gallery</a>
+        <a class="github" href="https://github.com/stacksimplify/aws-ai-practitioner" target="_blank">💻 View GitHub Repo</a>
+        <a class="udemy" href="https://www.udemy.com/course/aws-certified-ai-practitioner/?refcode=stacksimplify" target="_blank">🎓 View on Udemy</a>
+      </div>
     </div>
 
-    <!-- 🚀 Add new course cards below as you expand -->
+    <!-- 🚀 Future courses can be added here as new cards -->
+
   </div>
+
+  <!-- Floating Enroll CTA (flagship course, DevOps for now) -->
+  <a class="cta-udemy" href="https://www.udemy.com/course/aws-devops-realworld-projects/?refcode=stacksimplify" target="_blank">
+    🎓 Enroll in AWS DevOps Now
+  </a>
 </body>
 </html>

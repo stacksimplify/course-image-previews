@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>AWS AI Practitioner – Course Image Gallery</title>
+  <title>AWS DevOps – Course Image Gallery</title>
   <style>
     body { font-family: Arial, sans-serif; margin:0; background:#111; color:#fff;
            display:flex; flex-direction:column; align-items:center; height:100vh; justify-content:center; }
@@ -11,24 +11,13 @@
     button { background:#444; border:none; color:#fff; padding:10px 20px; border-radius:8px; cursor:pointer; }
     button:hover { background:#666; }
     .top-controls { margin-bottom:15px; }
-    .footer { margin-top:20px; font-size:14px; text-align:center; display:flex; flex-direction:column; gap:8px; }
-    .footer a { text-decoration:none; padding:8px 12px; border-radius:6px; display:inline-block; }
-    .footer a.home { background:#444; color:#fff; }
-    .footer a.home:hover { background:#666; }
-    .footer a.github { background:#2d3748; color:#61dafb; }
-    .footer a.github:hover { background:#3a475c; }
-    .footer a.udemy { background:#a435f0; color:#fff; }
-    .footer a.udemy:hover { background:#922bd9; }
-    h2 a { color:#fff; text-decoration:none; }
-    h2 a:hover { color:#a435f0; }
+    .footer { margin-top:20px; font-size:14px; }
+    .footer a { color:#61dafb; text-decoration:none; }
+    .footer a:hover { text-decoration:underline; }
   </style>
 </head>
 <body>
-  <h2>
-    <a href="https://www.udemy.com/course/aws-certified-ai-practitioner/?refcode=stacksimplify" target="_blank">
-      AWS AI Practitioner – Course Image Gallery
-    </a>
-  </h2>
+  <h2>AWS DevOps – Course Image Gallery</h2>
 
   <div class="top-controls">
     <button onclick="goHome()">🏠 Home</button>
@@ -42,25 +31,15 @@
   </div>
 
   <div class="footer">
-    <a id="homeLink" class="home" href="#">🏠 Back to Home</a>
-    <a class="github" href="https://github.com/stacksimplify/aws-ai-practitioner" target="_blank">💻 View GitHub Repo</a>
-    <a class="udemy" href="https://www.udemy.com/course/aws-certified-ai-practitioner/?refcode=stacksimplify" target="_blank">🎓 View on Udemy</a>
+    <a href="/course-image-previews/">← Back to Home</a>
   </div>
 
   <script>
     const repoOwner = "stacksimplify";
     const repoName  = "course-image-previews";
-    const imagesFolder = "docs/courses/aws-ai-practitioner/images";
+    const imagesFolder = "docs/courses/aws-devops/images";
     let images = [], index = 0;
     const img = document.getElementById("gallery");
-
-    // ✅ Dynamic Home URL
-    function getHomeUrl() {
-      const { protocol, host } = window.location;
-      return `${protocol}//${host}/`;
-    }
-    function goHome() { window.location.href = getHomeUrl(); }
-    document.getElementById("homeLink").href = getHomeUrl();
 
     async function fetchImages() {
       const url = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${imagesFolder}`;
@@ -80,6 +59,7 @@
 
     function nextImage() { showImage(index + 1); }
     function prevImage() { showImage(index - 1); }
+    function goHome() { window.location.href = "/course-image-previews/"; }
 
     document.addEventListener("keydown", e => {
       if (e.key === "ArrowRight") nextImage();
@@ -88,7 +68,5 @@
 
     fetchImages();
   </script>
-<!-- Floating Enroll Button -->
-<a class="cta-udemy" href="https://www.udemy.com/course/aws-certified-ai-practitioner/?refcode=stacksimplify" target="_blank">🎓 Enroll Now</a>
 </body>
 </html>
