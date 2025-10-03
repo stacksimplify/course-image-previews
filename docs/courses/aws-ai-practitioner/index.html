@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>AWS AI Practitioner – Course Image Gallery</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin:0; background:#111; color:#fff;
+           display:flex; flex-direction:column; align-items:center; height:100vh; justify-content:center; }
+    img { max-width:90%; max-height:80vh; border:2px solid #444; border-radius:10px; margin-bottom:15px; background:#000; }
+    .controls { display:flex; gap:15px; }
+    button { background:#444; border:none; color:#fff; padding:10px 20px; border-radius:8px; cursor:pointer; }
+    button:hover { background:#666; }
+  </style>
+</head>
+<body>
+  <h2>AWS AI Practitioner – Course Image Gallery</h2>
+  <img id="gallery" src="" alt="Course Image">
+  <div class="controls">
+    <button onclick="prevImage()">⬅ Previous</button>
+    <button onclick="nextImage()">Next ➡</button>
+  </div>
+
+  <script>
+    const repoOwner = "stacksimplify";
+    const repoName  = "course-image-previews";
+    const imagesFolder = "docs/courses/aws-ai-practitioner/images";
+    let images = [], index = 0;
+    const img = document.getElementById("gallery");
+
+    async function fetchImages() {
+      const url = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${imagesFolder}`;
+      const response = await fetch(url);
+      const files = await response.json();
+      images = files.filter(f => f.name.endsWith(".png")).map(f => f.download_url).sort();
+      showImage(0);
+    }
+
+    function showImage(i) {
+      if (!images.length) return;
+      if (i < 0) i = images.length - 1;
+      if (i >= images.length) i = 0;
+      index = i;
+      img.src = images[index];
+    }
+
+    function nextImage() { showImage(index + 1); }
+    function prevImage() { showImage(index - 1); }
+
+    document.addEventListener("keydown", e => {
+      if (e.key === "ArrowRight") nextImage();
+      if (e.key === "ArrowLeft") prevImage();
+    });
+
+    fetchImages();
+  </script>
+</body>
+</html>
